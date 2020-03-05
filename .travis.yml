@@ -1,0 +1,21 @@
+language: node_js
+sudo: false
+
+node_js:
+  - "9"
+  - "8"
+
+notifications:
+  email:
+    recipents:
+      - y1j2x34@qq.com
+  on_success: change
+  on_failure: always
+
+install:
+  - npm i
+
+script:
+  - npm run ci
+after_success:
+  npm run codecov

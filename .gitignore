@@ -1,0 +1,8 @@
+/.vscode
+/node_modules
+/docs
+/temp
+/coverage
+/test/dist
+/.rpt2_cache
+/dist
