@@ -24,13 +24,16 @@
         "commit": "git-cz",
         "lint": " tslint {src,test}/**/*.ts",
         "format": "tslint {src,test}/**/*.ts  --fix",
-        "pretest:debug": "npm run lint",
-        "test:debug": "karma start ./karma.debug.conf.js --browsers Chrome",
-        "ci": "karma start ./karma.travis.conf.js --browsers HeadlessChrome --single-run true",
+        "test:debugger": "cross-env TS_NODE_PROJECT=\"./build/tsconfig.json\" karma start ./build/karma/karma.debug.conf.ts --browsers Chrome",
+        "ci": "cross-env TS_NODE_PROJECT=\"./build/tsconfig.json\" karma start ./build/karma/karma.ci.conf.ts --browsers HeadlessChrome",
         "codecov": "codecov < coverage/cobertura-coverage.xml",
-        "test:chromeheadless": "karma start ./karma.debug.conf.js --browsers HeadlessChrome --single-run true",
-        "build": "rollup -c rollup.config.js --environment 'production'",
-        "gendoc": "typedoc ./src  --target es5 --out dist/docs --name rollup-ts-karma-mocha-chai-boilerplate --hideGenerator"
+        "build:cjs": "npm run run:build -- --output-format=cjs",
+        "build:umd": "npm run run:build -- --output-format=umd",
+        "build:esm": "npm run run:build -- --output-format=esm --output-language=ES6",
+        "build:all": "rimraf ./dist && npm run build:cjs && npm run build:umd && npm run build:esm",
+        "run:build": "cross-env TS_NODE_PROJECT=\"./build/tsconfig.json\" webpack --config ./build/webpack/webpack.build.ts",
+        "gendoc": "typedoc ./src  --target es5 --out dist/docs --name webpack-ts-karma-mocha-chai-boilerplate --hideGenerator",
+        "publish:local": "npm pack"
     },
     "lint-staged": {
         "{src,test}/**/*.ts": [
@@ -40,33 +43,39 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/y1j2x34/rollup-ts-karma-mocha-chai-boilerplate.git"
+        "url": "git+https://github.com/y1j2x34/webpack-ts-karma-mocha-chai-boilerplate.git"
     },
     "bugs": {
-        "url": "https://github.com/y1j2x34/rollup-ts-karma-mocha-chai-boilerplate/issues"
+        "url": "https://github.com/y1j2x34/webpack-ts-karma-mocha-chai-boilerplate/issues"
     },
     "keywords": [
-        "rollup-ts-karma-mocha-chai-boilerplate"
+        "webpack-ts-karma-mocha-chai-boilerplate"
     ],
     "files": [
         "dist"
     ],
-    "homepage": "https://github.com/y1j2x34/rollup-ts-karma-mocha-chai-boilerplate#readme",
+    "homepage": "https://github.com/y1j2x34/webpack-ts-karma-mocha-chai-boilerplate#readme",
     "author": "'y1j2x34' <y1j2x34@qq.com> (http://www.vgerbot.com/)",
     "license": "ISC",
     "devDependencies": {
-        "@rollup/plugin-commonjs": "11.0.1",
-        "@rollup/plugin-json": "4.0.1",
-        "@rollup/plugin-node-resolve": "7.0.0",
-        "@rollup/plugin-strip": "1.3.1",
         "@types/chai": "^4.2.7",
+        "@types/commander": "^2.12.2",
+        "@types/karma": "^4.4.0",
+        "@types/karma-coverage-istanbul-reporter": "^2.1.0",
+        "@types/karma-webpack": "^2.0.7",
         "@types/mocha": "^5.2.7",
-        "@types/node": "^13.1.6",
+        "@types/node": "^13.7.7",
+        "@types/webpack": "^4.41.7",
+        "@types/webpack-chain": "^5.2.0",
+        "@types/webpack-dev-server": "^3.10.0",
         "@types/websocket": "1.0.0",
+        "@types/yargs": "^15.0.4",
         "chai": "^4.2.0",
         "codecov": "3.6.1",
         "commitizen": "^4.0.3",
         "commitlint": "8.3.4",
+        "coverage-istanbul-loader": "^3.0.0",
+        "cross-env": "^7.0.1",
         "cz-customizable": "^6.2.0",
         "fs-extra": "8.1.0",
         "husky": "4.0.7",
@@ -76,26 +85,32 @@
         "karma-coverage-istanbul-reporter": "2.1.1",
         "karma-mocha": "^1.3.0",
         "karma-mocha-reporter": "^2.2.5",
-        "karma-rollup-preprocessor": "7.0.2",
-        "karma-sourcemap-loader": "0.3.7",
+        "karma-sourcemap-loader": "^0.3.7",
+        "karma-webpack": "^4.0.2",
         "lint-staged": "9.5.0",
         "mocha": "^7.0.0",
         "phantomjs-polyfill-object-assign": "0.0.2",
         "prettier": "1.19.1",
-        "rollup": "1.29.0",
-        "rollup-plugin-istanbul": "2.0.1",
-        "rollup-plugin-node-builtins": "2.1.2",
-        "rollup-plugin-typescript2": "0.25.3",
-        "rollup-plugin-uglify": "6.0.4",
-        "ts-node": "^8.6.1",
+        "rimraf": "^3.0.2",
+        "ts-loader": "^6.2.1",
+        "ts-node": "^8.6.2",
+        "tsconfig-paths": "^3.9.0",
         "tslib": "1.10.0",
         "tslint": "5.20.1",
         "tslint-config-prettier": "1.18.0",
         "tslint-plugin-prettier": "2.1.0",
         "typedoc": "0.16.2",
-        "typescript": "3.7.4"
+        "typescript": "3.7.4",
+        "webpack": "^4.42.0",
+        "webpack-chain": "^6.4.0",
+        "webpack-cli": "^3.3.11",
+        "webpack-dev-server": "^3.10.3",
+        "yargs": "^15.1.0"
     },
-    "dependencies": {},
+    "dependencies": {
+        "@purtuga/esm-webpack-plugin": "^1.2.1",
+        "D": "^1.0.0"
+    },
     "husky": {
         "hooks": {
             "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",

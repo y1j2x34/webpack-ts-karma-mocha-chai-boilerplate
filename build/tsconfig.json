@@ -1,0 +1,15 @@
+{
+    "extends": "../tsconfig.json",
+    "compilerOptions": {
+        "allowSyntheticDefaultImports": true,
+        "lib": ["ESNext"],
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "sourceMap": true,
+        "target": "ES5",
+        "resolveJsonModule": true
+    },
+    "include": [
+        "./"
+    ]
+}

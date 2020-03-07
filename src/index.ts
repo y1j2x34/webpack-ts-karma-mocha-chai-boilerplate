@@ -1,3 +1,4 @@
 export function hello() {
-    return 'world';
+    const world: string = 'world';
+    return world;
 }
