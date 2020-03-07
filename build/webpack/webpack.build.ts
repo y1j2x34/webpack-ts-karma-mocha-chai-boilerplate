@@ -21,7 +21,7 @@ yargs
 const format: 'cjs' | 'umd' | 'esm' = yargs.argv.outputFormat as any;
 
 config.entry('index').add(path.resolve(__dirname, '../../src/index.ts'));
-config.mode('development');
+config.mode('production');
 config.devtool('cheap-module-source-map');
 
 config.output.path(path.resolve(__dirname, '../..', pkg.distDir));

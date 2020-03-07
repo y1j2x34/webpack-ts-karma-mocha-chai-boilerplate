@@ -15,6 +15,7 @@
       "listFiles": true,
       "forceConsistentCasingInFileNames": true,
       "esModuleInterop": true,
+      "experimentalDecorators": true,
       "typeRoots": [
           "node_modules/@types",
           "src/types"
