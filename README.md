@@ -12,7 +12,7 @@ Included and configurated these following tools:
 - NPM scripts for common operations
 - simple example of Typescript code and unit test
 - .editorconfig for consistent file format
-- Configuration for [Travis CI](https://travis-ci.org/] and [codecov.io](https://codecov.io/)
+- Configuration for [Travis CI](https://travis-ci.org/) and [codecov.io](https://codecov.io/)
 - Supports to generate bundles in different module formats: UMD, Commonjs, ES module
 - commitlint: checks if your commit message meet the conventional commit format
 
