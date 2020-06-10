@@ -4,8 +4,8 @@ A comprehensive template. Works out of the box for most front-end projects
 
 Included and configurated these following tools:
 
-- typescript@3.7.4, All code including webpack configuration is written in "Typescript" except commitlint and git-cz configuration.
-- webpack: you know it
+- typescript@3.7.4, All code including webpack configuration is written in "Typescript" except commitlint and git-cz configuration
+- webpack: A static module bundler for modern JavaScript applications
 - Karma: A tool that allows you to execute test cases code in multiple real browsers
 - mocha + chai + instanbul: unit testing and code coverage
 - tslint and prettier to enforce consistence code style
