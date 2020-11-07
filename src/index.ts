@@ -1,4 +1,3 @@
-export function hello() {
-    const world: string = 'world';
-    return world;
+export function hello(): string {
+    return 'world';
 }
