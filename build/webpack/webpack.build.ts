@@ -6,7 +6,7 @@ import ESMWebpackPlugin from '@purtuga/esm-webpack-plugin';
 
 yargs
     .option('output-format', {
-        describe: 'Specific the output format of wepack',
+        describe: 'Specifies the output format of wepack',
         choices: ['cjs', 'umd', 'esm'],
         demandOption: true,
         default: 'cjs'
